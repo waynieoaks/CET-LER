@@ -40,9 +40,26 @@ Citizen.CreateThread(function()
 			if (GetIsVehicleEngineRunning(vehicle)) then
 				Citizen.Wait(150) -- gives client time between car auto turning off and running following scripts.
 				SetVehicleEngineOn(vehicle, true, true, false) -- restarts car engine
-				TaskLeaveVehicle(ped, vehicle, 0)
+					if IsPedInAnyVehicle(ped, false) and IsControlPressed(2, 75) and not IsEntityDead(ped) then
+						-- Leave vehicle / keep door open / keep engine on
+						TaskLeaveVehicle(ped, vehicle, 256)
+						Citizen.Wait(150) -- wait 
+						SetVehicleEngineOn(vehicle, true, true, false)
+						Citizen.Wait(5000) -- Wait 5 seconds
+					else
+						-- leave vehicle / close door / keep engine on
+						TaskLeaveVehicle(ped, vehicle, 0)
+					end
 			else
-				TaskLeaveVehicle(ped, vehicle, 0)
+				Citizen.Wait(150) -- wait
+				if IsPedInAnyVehicle(ped, false) and IsControlPressed(2, 75) and not IsEntityDead(ped) then
+					-- Leave vehicle / keep door open / keep engine off
+					TaskLeaveVehicle(ped, vehicle, 256)
+					Citizen.Wait(5000) -- Wait 5 seconds
+				else
+					-- Leave vehicle / close door / keep engine off
+					TaskLeaveVehicle(ped, vehicle, 0)
+				end
 			end
 		end
     end

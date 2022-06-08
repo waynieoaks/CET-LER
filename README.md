@@ -18,3 +18,5 @@ The resource limits the player to the following:
 * Engine stays on after exiting the vehicle.
 
 *Due to how basic the script is, if you get into and out of the vehicle too fast the engine will turn off, I will look into this over the next few days to see what I can do about it.*
+
+Wayne edit: Added ability to keep drivers door open on exit by holding F and keeping engine in original state.
